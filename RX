@@ -2,7 +2,7 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-RF24 radio(D3, D4); // CSN, CE
+RF24 radio(D8, D4); // CSN, CE
 
 const byte address[6] = "00001";
 
