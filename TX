@@ -1,0 +1,35 @@
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+
+RF24 radio(21, 22); // CSN, CE
+
+const byte address[6] = "00001";
+
+void setup() {
+  pinMode(21,OUTPUT);
+  Serial.begin(9600);
+  radio.begin();
+  radio.openWritingPipe(address);
+  radio.setPALevel(RF24_PA_MIN);
+  radio.stopListening();
+}
+
+void loop() {
+  // char text[20] = "";// khai báo string dạng array
+  // byte i = 0;
+  // while (Serial.available() == 0)
+  // {
+  //   // nothing
+  // }
+  // while (Serial.available() > 0)
+  // {
+  //   char ch = Serial.read();
+  //   text[i] = ch;
+  //   i++;
+  //   delay(5);
+  // }
+  const char text[] = "Hello World";
+  radio.write(&text, sizeof(text));
+  delay(2000);
+}
