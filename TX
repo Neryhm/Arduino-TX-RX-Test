@@ -2,13 +2,12 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-RF24 radio(5, 22); // CSN, CE
+RF24 radio(9, 53); // CE, CSN
 
-const byte address[6] = "00001";
+const byte address[6] = "13245";
 
 void setup() {
-  pinMode(21,OUTPUT);
-  Serial.begin(9600);
+  Serial.begin(115200);
   radio.begin();
   radio.openWritingPipe(address);
   radio.setPALevel(RF24_PA_MIN);
@@ -16,7 +15,7 @@ void setup() {
 }
 
 void loop() {
-  // char text[20] = "";// khai báo string dạng array
+  // char text[32] = "";// khai báo string dạng array
   // byte i = 0;
   // while (Serial.available() == 0)
   // {
@@ -29,7 +28,7 @@ void loop() {
   //   i++;
   //   delay(5);
   // }
-  const char text[] = "Hello World";
+  const char text[]="ngu";
   radio.write(&text, sizeof(text));
-  delay(2000);
+  delay(1000);
 }
