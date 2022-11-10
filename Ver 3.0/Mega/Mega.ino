@@ -1,5 +1,4 @@
 #include "Mega_defines.h"
-#include <QTRSensors.h>
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
@@ -8,21 +7,32 @@ RF24 radio(NRF_CE, NRF_CSN); // CE, CSN
 
 const byte address[6] = "13245";
 
-void startNRFtransmitter(){
+void startNRFreceiver(){
   radio.begin();
-  radio.openWritingPipe(address);
+  radio.openReadingPipe(0, address);
   radio.setPALevel(RF24_PA_MIN);
-  radio.stopListening();
+  radio.startListening();
+}
+
+void startLineFollowed(){
+
 }
 
 void setup() {
   Serial.begin(9600);
-  startNRFtransmitter();
+  startNRFreceiver();
   startLineFollowed();
+
+}
+
+void readNRF(){
+  if (radio.available()) {
+    char text[32] = "";
+    radio.read(&text, sizeof(text));
+    Serial.println(text);
+  }
 }
 
 void loop() {
-  const char text[]="ngu";
-  radio.write(&text, sizeof(text));
-  delay(1000);
+  readNRF();
 }
