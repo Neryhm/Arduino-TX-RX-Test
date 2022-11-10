@@ -30,11 +30,11 @@ void setup() {
 void readJoy(){
   int valx = analogRead(joystickX);
   int valy = analogRead(joystickY);
+  int joyVal[2]={valx,valy};
   int joySwitch = digitalRead(joystickSwitch);
   Serial.print(valx);Serial.print("  ");
   Serial.print(valy);Serial.print("  ");
   Serial.println(joySwitch);
-  delay(1000);
 }
 
 void sendNRF(){

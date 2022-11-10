@@ -5,7 +5,7 @@
 
 RF24 radio(NRF_CE, NRF_CSN); // CE, CSN
 
-const byte address[6] = "13245";
+const byte address[5] = "13245";
 
 void startNRFreceiver(){
   radio.begin();
